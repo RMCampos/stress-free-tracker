@@ -9,6 +9,7 @@ let currentViewDate = new Date();
 
 // Initialize the app
 function init() {
+  console.log('Initializing Stress Tracker...');
   updateDaysCounter();
   renderCalendar();
   updateStats();
@@ -29,7 +30,7 @@ function updateDaysCounter() {
 
 // Report a bug (reset counter)
 function reportBug() {
-  if (confirm('Are you sure you want to report a stress? This will reset your streak.')) {
+  showUpdateNotification('Are you sure you want to report a stress? This will reset your streak.', () => {
     const today = new Date().toISOString().split('T')[0];
     if (!bugDates.includes(today)) {
       bugDates.push(today);
@@ -38,7 +39,7 @@ function reportBug() {
     updateDaysCounter();
     renderCalendar();
     updateStats();
-  }
+  });
 }
 
 // Calendar navigation
@@ -190,5 +191,65 @@ function calculateLongestStreak() {
   return longestStreak;
 }
 
+function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 2000);
+}
+
+function showUpdateNotification(textMessage, confirmFunction) {
+  const notification = document.getElementById('updateNotification');
+  const updateBtn = document.getElementById('updateBtn');
+  const dismissBtn = document.getElementById('dismissBtn');
+  const messageSpan = document.getElementsByClassName('update-message');
+
+  if (messageSpan && messageSpan.length > 0) {
+    messageSpan[0].textContent = textMessage;
+  }
+
+  notification.classList.add('show');
+
+  const yesFunction = confirmFunction || (() => {
+    window.location.reload();
+  });
+
+  updateBtn.addEventListener('click', () => {
+    yesFunction();
+    window.location.reload();
+  });
+
+  dismissBtn.addEventListener('click', () => {
+    notification.classList.remove('show');
+  });
+}
+
+window.reportBug = reportBug;
+window.previousMonth = previousMonth;
+window.nextMonth = nextMonth;
+
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', init);
+
+// PWA Update handling
+if ('serviceWorker' in navigator) {
+  let updateAvailable = false;
+
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' }).then(registration => {
+      registration.addEventListener('updatefound', () => {
+        const newWorker = registration.installing;
+
+        newWorker.addEventListener('statechange', () => {
+          if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+            // New service worker installed, show update notification
+            updateAvailable = true;
+            showUpdateNotification('New version available! Update?');
+          }
+        });
+      });
+    });
+  });
+}
