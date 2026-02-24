@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stress-Free Days Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Stress-Free Days Tracker</h1>
+        
+        <div class="days-banner">
+            <div class="days-number" id="daysCounter">0</div>
+            <div class="days-text">Days Without Stress</div>
+        </div>
+
+        <button class="bug-button" onclick="reportBug()">
+            😡 Report Stress 
+        </button>
+
+        <div class="calendar">
+            <div class="calendar-header">
+                <button class="calendar-nav" onclick="previousMonth()">‹ Previous</button>
+                <div class="calendar-title" id="calendarTitle">Month Year</div>
+                <button class="calendar-nav" onclick="nextMonth()">Next ›</button>
+            </div>
+            <div class="calendar-grid" id="calendarGrid">
+                <!-- Calendar will be generated here -->
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number" id="totalBugs">0</div>
+                <div class="stat-label">Total Stressed Days</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="longestStreak">0</div>
+                <div class="stat-label">Longest Streak</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="currentMonth">0</div>
+                <div class="stat-label">Stress This Month</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
