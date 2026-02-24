@@ -5,8 +5,8 @@ export default defineConfig({
   base: '/stress-free-tracker/',
   plugins: [
     VitePWA({
-      registerType: 'prompt',
-      includeAssets: ['icon.svg'],
+      registerType: 'autoUpdate',
+      includeAssets: ['icon.png'],
       manifest: {
         name: 'Stress-Free Tracker',
         short_name: 'Stress-Free',
@@ -16,9 +16,9 @@ export default defineConfig({
         display: 'standalone',
         icons: [
           {
-            src: 'icon.svg',
+            src: 'icon.png',
             sizes: '512x512',
-            type: 'image/svg+xml'
+            type: 'image/png'
           }
         ]
       },
@@ -40,6 +40,9 @@ export default defineConfig({
             }
           }
         ]
+      },
+      devOptions: {
+        enabled: true
       }
     })
   ]
