@@ -26,7 +26,7 @@ jobs:
       - name: Ensure destination folder exists
         run: |
           ssh -i ~/.ssh/deploy_key deploy@${{ secrets.DEPLOY_HOST }} \
-            "mkdir -p /srv/sites/app1 && chmod 755 /srv/sites/${{ env.APP_FOLDER }}"
+            "mkdir -p /srv/sites/${{ env.APP_FOLDER }} && chmod 755 /srv/sites/${{ env.APP_FOLDER }}"
 
       - name: Upload site
         run: |
