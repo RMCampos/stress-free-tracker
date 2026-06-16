@@ -1,3 +1,6 @@
+# Archived repo
+
+The new content can be found in Gitea: https://lightroasted.vps-kinghost.net/rmcampos/stress-free-tracker
 # Stress-Free Tracker
 
 A Progressive Web App (PWA) to track your stress-free days. Log the days you felt stressed, visualize them on a calendar, and monitor streaks and monthly stats — all stored locally in your browser.
