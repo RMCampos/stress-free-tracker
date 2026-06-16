@@ -2,7 +2,6 @@ import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
-  base: '/stress-free-tracker/',
   plugins: [
     VitePWA({
       registerType: 'autoUpdate',

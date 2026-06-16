@@ -1,4 +1,4 @@
-name: Deploy to Pages
+name: Build & Deploy to Pages
 
 on:
   push:
@@ -8,10 +8,24 @@ env:
   APP_FOLDER: "stress-free-tracker"
 
 jobs:
-  deploy:
+  build-deploy:
     runs-on: easynode-debian
     steps:
       - uses: actions/checkout@v4
+
+      - name: Cache npm dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run build
+        run: npm run build
 
       - name: Install rsync + ssh client
         run: apt-get update -qq && apt-get install -y -qq rsync openssh-client
