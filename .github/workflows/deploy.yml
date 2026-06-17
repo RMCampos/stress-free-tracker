@@ -44,6 +44,6 @@ jobs:
 
       - name: Upload site
         run: |
-          rsync -avz --delete --exclude='.git*' --exclude='.gitea' \
+          rsync -avz --delete --exclude='.git*' --exclude='.gitea' --exclude='node_modules' \
             -e "ssh -i ~/.ssh/deploy_key" \
             ./ deploy@${{ secrets.DEPLOY_HOST }}:/srv/sites/${{ env.APP_FOLDER }}/
