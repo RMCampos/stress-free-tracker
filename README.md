@@ -12,9 +12,9 @@ A Progressive Web App (PWA) to track your stress-free days. Log the days you fel
 
 ## Live Demo
 
-The app is deployed to GitHub Pages and available at:
+The app is deployed to Pages and available at:
 
-**https://rmcampos.github.io/stress-free-tracker/**
+**https://stress-free-tracker.lightroasted.vps-kinghost.net**
 
 ## Tech Stack
 
