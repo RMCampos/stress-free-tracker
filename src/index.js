@@ -4,7 +4,8 @@ import { registerSW } from 'virtual:pwa-register'
 
 // Data storage
 let bugDates = JSON.parse(localStorage.getItem('bugDates')) || [];
-let startDate = localStorage.getItem('startDate') || new Date().toISOString().split('T')[0];
+const now = new Date();
+let startDate = localStorage.getItem('startDate') || `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
 
 // Calendar state
 let currentViewDate = new Date();
@@ -33,7 +34,8 @@ function updateDaysCounter() {
 // Report a bug (reset counter)
 function reportBug() {
   showUpdateNotification('Are you sure you want to report a stress? This will reset your streak.', () => {
-    const today = new Date().toISOString().split('T')[0];
+    const now = new Date();
+    const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
     if (!bugDates.includes(today)) {
       bugDates.push(today);
       localStorage.setItem('bugDates', JSON.stringify(bugDates));
